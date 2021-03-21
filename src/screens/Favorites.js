@@ -3,14 +3,14 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text } from 'react-native';
 
-const Stack = createStackNavigator();
+const FavoriteStack = createStackNavigator();
 
 export default function FavoriteScreenStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Favorites" component={ FavoriteScreen }>
-      </Stack.Screen>
-    </Stack.Navigator>
+    <FavoriteStack.Navigator>
+      <FavoriteStack.Screen name="Favorites" component={ FavoriteScreen }>
+      </FavoriteStack.Screen>
+    </FavoriteStack.Navigator>
   );
 }
 

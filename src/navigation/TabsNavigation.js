@@ -12,10 +12,13 @@ const Tab = createBottomTabNavigator();
 export default function TabsNavigation() {
   return (
     <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen name="Home" component={ HomeScreenStack } />
+      <Tab.Screen
+        name="Home"
+        component={ HomeScreenStack }
+        />
       <Tab.Screen name="Navegar" component={ NavigateScreenStack } />
       <Tab.Screen name="Comuna" component={ LocationScreenStack } />
-      <Tab.Screen name="Favoritos" component={FavoriteScreenStack} />
+      <Tab.Screen name="Favoritos" component={ FavoriteScreenStack } />
     </Tab.Navigator>
   );
 };

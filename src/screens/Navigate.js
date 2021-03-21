@@ -3,14 +3,14 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text } from 'react-native';
 
-const Stack = createStackNavigator();
+const NavigateStack = createStackNavigator();
 
 export default function NavigateScreenStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Navigate" component={ NavigateScreen }>
-      </Stack.Screen>
-    </Stack.Navigator>
+    <NavigateStack.Navigator>
+      <NavigateStack.Screen name="Navigate" component={ NavigateScreen }>
+      </NavigateStack.Screen>
+    </NavigateStack.Navigator>
   );
 }
 
