@@ -42,11 +42,13 @@ function HomeScreen() {
       </View>
       <TableCardComponent
         options={{
-          title: 'Casos',
+          title: 'Casos de Contagio',
           content: {
             headers: ['Casos Activos', 'Recuperados', 'Total de Casos'],
-            data: [[10,11,12]] }
-          }}
+            data: [[10,11,12]],
+            footer: 'actualizado el 22-mar-2021'
+          },
+        }}
       />
       <TotalCaseCardComponent
         options={{ title: 'test2', content: 'mi contenido 2' }}

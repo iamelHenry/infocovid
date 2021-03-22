@@ -3,7 +3,7 @@ import { Card, Title, Paragraph, DataTable } from 'react-native-paper';
 
 const TotalCaseCardComponent = ({ options }) => {
   return (
-    <Card>    
+    <Card>
       <Card.Content>
         <Title>{options.title}</Title>
         <DataTable>
@@ -18,7 +18,7 @@ const TotalCaseCardComponent = ({ options }) => {
             <DataTable.Cell numeric>12</DataTable.Cell>
           </DataTable.Row>
         </DataTable>
-      </Card.Content>     
+      </Card.Content>
     </Card>
   );
 }
@@ -27,7 +27,7 @@ export const TableCardComponent = ({ options }) => {
   return (
     <Card>
       <Card.Content>
-        <Title>{options.title}</Title>        
+        <Title>{options.title}</Title>
         <DataTable>
           <DataTable.Header>
             {
@@ -46,7 +46,11 @@ export const TableCardComponent = ({ options }) => {
             )
           }
         </DataTable>
-      </Card.Content>     
+        <Card.Title
+          subtitle={options.content.footer}
+          subtitleStyle={{ textAlign: "right" }}
+        />
+      </Card.Content>
     </Card>
   );
 }
