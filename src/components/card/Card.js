@@ -25,9 +25,15 @@ const TotalCaseCardComponent = ({ options }) => {
 
 export const TableCardComponent = ({ options }) => {
   return (
-    <Card>
+    <Card style={{
+      border: "solid 1px",
+      borderRadius: "2em"
+    }}>
       <Card.Content>
-        <Title>{options.title}</Title>
+        <Card.Title
+          title={options.title}
+          subtitle={options.subtitle}
+          />
         <DataTable>
           <DataTable.Header>
             {
@@ -38,9 +44,9 @@ export const TableCardComponent = ({ options }) => {
           </DataTable.Header>
           {
             options.content.data.map(
-              (row, index) => (<DataTable.Row key={index} >{
+              (row, index) => (<DataTable.Row key={index}>{
                 row.map(
-                  (cell, index) => (<DataTable.Cell key={index} numeric>{cell}</DataTable.Cell>)
+                  (cell, index) => (<DataTable.Cell key={index} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{cell}</DataTable.Cell>)
                 )
               }</DataTable.Row>)
             )
