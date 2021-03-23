@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { ScrollView, View, Text } from 'react-native';
-import TotalCaseCardComponent, { TableCardComponent } from '../components/card/Card';
+import { TableCardComponent } from '../components/card/Card';
 
 const HomeStack = createStackNavigator();
 
@@ -16,7 +16,6 @@ export default function HomeScreenStack() {
 }
 
 function HomeScreen() {
-  const extraData='test';
   return(
     <ScrollView>
       <TableCardComponent

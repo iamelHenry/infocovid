@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, Title, Paragraph, DataTable } from 'react-native-paper';
+import { Card, Title, Paragraph, DataTable, Subheading } from 'react-native-paper';
 
 const TotalCaseCardComponent = ({ options }) => {
   return (
@@ -38,7 +38,48 @@ export const TableCardComponent = ({ options }) => {
           <DataTable.Header>
             {
               options.content.headers.map(
-                (header, index) => <DataTable.Title key={index} >{header}</DataTable.Title>
+                (header, index) => <DataTable.Title key={index} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{header}</DataTable.Title>
+              )
+            }
+          </DataTable.Header>
+          {
+            options.content.data.map(
+              (row, index) => (<DataTable.Row key={index}>{
+                row.map(
+                  (cell, index) => (<DataTable.Cell key={index} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{cell}</DataTable.Cell>)
+                )
+              }</DataTable.Row>)
+            )
+          }
+        </DataTable>
+        <Card.Title
+          subtitle={options.content.footer}
+          subtitleStyle={{ textAlign: "right" }}
+        />
+      </Card.Content>
+    </Card>
+  );
+}
+
+export const LocationCardItem = ({ options, navigation }) => {
+  console.log('test',options.title, navigation);
+  return (
+    <Card
+      style={{
+        border: "solid 1px",
+        borderRadius: "2em"
+      }}
+      >
+      <Card.Content>
+        <Card.Title
+          title={options.title}
+          subtitle={options.subtitle}
+          />
+        <DataTable>
+          <DataTable.Header>
+            {
+              options.content.headers.map(
+                (header, index) => <DataTable.Title key={index} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{header}</DataTable.Title>
               )
             }
           </DataTable.Header>
