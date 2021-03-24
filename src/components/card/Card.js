@@ -61,14 +61,14 @@ export const TableCardComponent = ({ options }) => {
   );
 }
 
-export const LocationCardItem = ({ options, navigation }) => {
-  console.log('test',options.title, navigation);
+export const LocationCardItem = ({ options, onPress }) => {
   return (
     <Card
       style={{
         border: "solid 1px",
         borderRadius: "2em"
       }}
+      onPress={onPress}
       >
       <Card.Content>
         <Card.Title
