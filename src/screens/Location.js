@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, Button, ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { LocationCardItem } from '../components/card/Card';
-import ModalLocation, { showModalLocation } from '../components/modal/ModalLocation';
+import ModalLocation from '../components/modal/ModalLocation';
 
 const LocationStack = createStackNavigator();
 

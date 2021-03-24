@@ -102,4 +102,18 @@ export const LocationCardItem = ({ options, onPress }) => {
   );
 }
 
+export const FaseCard = () => {
+  return (
+    <Card style={{
+        border: "solid 1px",
+        borderRadius: "2em"
+      }}>
+      <Card.Content>
+        <Title>Plan paso a paso</Title>
+        <Paragraph>Fase 1 : Cuarentena</Paragraph>
+      </Card.Content>
+    </Card>
+  );
+}
+
 export default TotalCaseCardComponent;
