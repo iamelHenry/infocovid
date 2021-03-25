@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ScrollView, View, Text } from 'react-native';
 import { TableCardComponent } from '../components/card/Card';
+import getHomeReport from '../services/Api';
 
 const HomeStack = createStackNavigator();
 
@@ -16,6 +17,15 @@ export default function HomeScreenStack() {
 }
 
 function HomeScreen() {
+  const [report, setReport] = React.useState(null);
+  React.useEffect(() => {
+    getHomeReport().then((response) => {
+      setReport(response.data);
+    });
+  }, []);
+
+  if (!report) return null;
+
   return(
     <ScrollView>
       <TableCardComponent
@@ -23,19 +33,19 @@ function HomeScreen() {
           title: 'Casos de contagio',
           content: {
             headers: ['Casos Activos', 'Recuperados', 'Total de Casos'],
-            data: [[10,11,12]],
-            footer: 'actualizado el 22-mar-2021'
+            data: [[report.totalCases.active,report.totalCases.recovered,report.totalCases.total]],
+            footer: `Actualizado el ${report.totalCases.lastUpdate}`
           },
         }}
       />
 
       <TableCardComponent
         options={{
-          title: 'Casos diarios : 6155',
+          title: `Casos diarios : ${report.dailyCases.total}`,
           content: {
             headers: ['con sintomas', 'asintomaticos', 'no informados'],
-            data: [[ 4142, 1547, 466]],
-            footer: 'actualizado el 22-03-2021'
+            data: [[report.dailyCases.symptomatic, report.dailyCases.asymptomatic, report.dailyCases.ni]],
+            footer: `Actualizado el ${report.dailyCases.lastUpdate}`
           }
         }}
       />
@@ -45,8 +55,8 @@ function HomeScreen() {
           title: 'Personas fallecidas',
           content: {
             headers: ['Nuevos fallecidos', 'Total personas fallecidas'],
-            data: [[11, 12]],
-            footer: 'actualizado el 22-03-2021'
+            data: [[report.deceased.latests, report.deceased.total]],
+            footer: `Actualizado el ${report.deceased.lastUpdate}`
           }
         }}
       />
