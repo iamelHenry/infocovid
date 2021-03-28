@@ -66,7 +66,7 @@ export const LocationCardItem = ({ options, onPress }) => {
     <Card
       style={{
         border: "solid 1px",
-        borderRadius: "2em"
+        borderRadius: "2em",
       }}
       onPress={onPress}
       >
@@ -102,7 +102,26 @@ export const LocationCardItem = ({ options, onPress }) => {
   );
 }
 
-export const FaseCard = () => {
+export const FaseCard = (data) => {
+  let msjPhase = '';
+  switch(parseInt(data.phase)) {
+    case 1:
+      msjPhase = 'Cuarentena';
+      break;
+    case 2:
+      msjPhase = 'Transicion';
+      break;
+    case 3:
+      msjPhase = 'Preparacion';
+      break;
+    case 4:
+      msjPhase = 'Apertura Inicial';
+      break;
+    default:
+      msjPhase = 'Desconocido';
+      break;
+  };
+  const paragraph = `Fase ${data.phase} : ${msjPhase}`;
   return (
     <Card style={{
         border: "solid 1px",
@@ -110,7 +129,7 @@ export const FaseCard = () => {
       }}>
       <Card.Content>
         <Title>Plan paso a paso</Title>
-        <Paragraph>Fase 1 : Cuarentena</Paragraph>
+        <Paragraph>{paragraph}</Paragraph>
       </Card.Content>
     </Card>
   );

@@ -17,7 +17,7 @@ export default function TabsNavigation() {
         name="Home"
         component={ HomeScreenStack }
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Inicio',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           )
@@ -27,7 +27,7 @@ export default function TabsNavigation() {
         name="Navegar"
         component={ NavigateScreenStack }
         options={{
-          tabBarLabel: 'Navegar',
+          tabBarLabel: 'Regiones',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="map" color={color} size={size} />
           )

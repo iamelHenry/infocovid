@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View } from 'react-native-paper';
-// import { LineChart } from 'react-native-chart-kit';
 import { LineChart, Grid } from 'react-native-svg-charts';
 
 export default function LocationCasesChart () {

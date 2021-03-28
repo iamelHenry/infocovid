@@ -4,24 +4,25 @@ import { FaseCard, LocationCardItem, ImageCard } from '../card/Card';
 import LocationCasesChart from '../chart/Chart';
 
 const ModalLocation = (props) => {
-  const { visible, setVisible } = props;
+  const { visible, setVisible, locationSelected } = props;
   const containerStyle = {backgroundColor: 'white', padding: 20};
 
+  if (!locationSelected) return null;
   return (
     <Provider>
       <Portal>
         <Modal visible={visible} onDismiss={()=> setVisible(false)} contentContainerStyle={containerStyle}>
-          <FaseCard />
+          <FaseCard phase={locationSelected.stepByStepPlan.phase}/>
           <LocationCardItem
             options={{ title: 'Cifras',
-              subtitle: 'casos' ,
+              subtitle: locationSelected.name,
               content: {
-                headers: ['total', 'hoy', 'incidencia'],
-                data: [[11,12,'90']],
+                headers: ['activos', 'nuevos', 'incidencia'],
+                data: [[locationSelected.activeCases.cases,
+                  locationSelected.newCases.cases,'90']],
               }
             }}
           />
-          <LocationCasesChart/>
         </Modal>
       </Portal>
     </Provider>

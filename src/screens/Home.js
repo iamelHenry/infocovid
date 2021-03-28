@@ -10,7 +10,7 @@ const HomeStack = createStackNavigator();
 export default function HomeScreenStack() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={ HomeScreen }>
+      <HomeStack.Screen name="Cifras Oficiales" component={ HomeScreen }>
       </HomeStack.Screen>
     </HomeStack.Navigator>
   );
