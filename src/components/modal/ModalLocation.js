@@ -17,9 +17,10 @@ const ModalLocation = (props) => {
             options={{ title: 'Cifras',
               subtitle: locationSelected.name,
               content: {
-                headers: ['activos', 'nuevos', 'incidencia'],
+                headers: ['activos', 'nuevos', 'incidencia actual'],
                 data: [[locationSelected.activeCases.cases,
-                  locationSelected.newCases.cases,'90']],
+                  locationSelected.newCases.cases,
+                  locationSelected.incidence.rate]],
               }
             }}
           />
