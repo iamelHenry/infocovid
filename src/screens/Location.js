@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Button, ScrollView } from 'react-native';
-import { Searchbar, Text } from 'react-native-paper';
+import { View, Button, ScrollView, Platform } from 'react-native';
+import { Searchbar } from 'react-native-paper';
 import { LocationCardItem } from '../components/card/Card';
 import ModalLocation from '../components/modal/ModalLocation';
 import { getLocations } from '../services/Api';
@@ -15,14 +15,8 @@ export default function LocationScreenStack() {
     <LocationStack.Navigator>
       <LocationStack.Screen
         name='Comunas'
-      >{props=> <LocationScreen {...props}
-                    options={{ title: 'Lo Prado' }} />}
+      >{props=> <LocationScreen {...props} />}
       </LocationStack.Screen>
-      <LocationStack.Screen
-        name='Search'
-        component={ SearchScreen }
-        options={{ title: 'Buscar' }}
-      />
     </LocationStack.Navigator>
   );
 }
@@ -34,6 +28,18 @@ function LocationScreen({ options }) {
   const [locationSelected, selectLocation] = React.useState(null);
   const [items, setItems] = React.useState(locations);
   const [page, setPage] = React.useState(1);
+  const [search, setSearch] = React.useState('');
+
+  React.useEffect(() => {
+    if (search.length > 2) {
+      setItems(
+      locations.filter((v) => {
+        return v.name.toLowerCase().includes(search.toLowerCase())
+      })
+    );
+    }
+  }, [search]);
+
   React.useEffect(()=>{
     if(locations) {
       setItems(locations.slice(0, page * pageSize));
@@ -59,12 +65,19 @@ function LocationScreen({ options }) {
           const height = nativeEvent.contentSize.height;
           if ((height - size) < (position + size))
           {
-            if((page * pageSize) < locations.length) {
+            if(((page * pageSize) < locations.length) && search === '') {
               setPage(page + 1);
             }
           }
         }}
       >
+      <Searchbar
+        placeholder="Busca tu comuna"
+        icon="arrow-left"
+        onChangeText={(e) => setSearch(e)}
+        onIconPress={() => {setSearch(''); setItems(locations.splice(0,pageSize))}}
+        value={search}
+      />
         { items.map((data) => {
           const key = `location-${data.code}`;
           const subtitle = `Etapa plan paso a paso : ${data.stepByStepPlan.phase}`;
@@ -88,13 +101,5 @@ function LocationScreen({ options }) {
       </ScrollView>
       <ModalLocation visible={showModal} setVisible={setShowModal} locationSelected={locationSelected} />
     </>
-  );
-}
-
-function SearchScreen() {
-  return(
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Search!</Text>
-    </View>
   );
 }

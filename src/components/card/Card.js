@@ -27,7 +27,7 @@ export const TableCardComponent = ({ options }) => {
   return (
     <Card style={{
       border: "solid 1px",
-      borderRadius: "2em"
+      borderRadius: 10
     }}>
       <Card.Content>
         <Card.Title
@@ -66,7 +66,7 @@ export const LocationCardItem = ({ options, onPress }) => {
     <Card
       style={{
         border: "solid 1px",
-        borderRadius: "2em",
+        borderRadius: 10,
       }}
       onPress={onPress}
       >
@@ -125,7 +125,7 @@ export const FaseCard = (data) => {
   return (
     <Card style={{
         border: "solid 1px",
-        borderRadius: "2em"
+        borderRadius: 10
       }}>
       <Card.Content>
         <Title>Plan paso a paso</Title>
