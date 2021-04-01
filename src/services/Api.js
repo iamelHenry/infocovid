@@ -53,3 +53,8 @@ const getPromise = (url) => {
       console.error(error);
     });
 }
+
+export const getLocationById = (id) => {
+  const url = `${API.URL}/location?code=${id}`;
+  return getPromise(url);
+}

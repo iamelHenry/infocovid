@@ -3,7 +3,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { List , Text} from 'react-native-paper';
 import { ScrollView } from 'react-native';
-import { getNavigationRegions, getNavigationLocations } from '../services/Api';
+import { getNavigationRegions, getNavigationLocations, getLocationById } from '../services/Api';
+import ModalLocation from '../components/modal/ModalLocation';
 
 const NavigateStack = createStackNavigator();
 
@@ -20,15 +21,30 @@ function NavigateScreen() {
   const [expanded, setExpanded] = React.useState(true);
   const [region, setRegion] = React.useState(null);
   const [locations, setLocation] = React.useState(null);
-  const handlePress = () => setExpanded(!expanded);
+  const [showModal, setShowModal] = React.useState(true);
+  const [modalLocation, setModalLocation] = React.useState(null);
+  const locationModal = (locationId) => {
+    getLocationById(locationId)
+      .then((response) => {
+        if(response.data.length > 0)
+        setModalLocation(response.data.pop())
+      })
+  };
+
+  React.useEffect(() => {
+    setShowModal(true);
+  }, [modalLocation]);
+
   React.useEffect(() => {
     getNavigationRegions().then((response) => {
       setRegion(response.data);
     });
   }, []);
+
   if (!region) return null;
 
   return(
+    <>
     <ScrollView>
       <List.Section title="Regiones de chile">
         <List.Subheader>Casos activos</List.Subheader>
@@ -53,6 +69,7 @@ function NavigateScreen() {
                     left={props => <List.Icon {...props}
                       icon="eye"
                       style={{ marginLeft: '10%' }} />}
+                    onPress={()=>{locationModal(item.code)}}
                   />)
                 )}
               </List.Accordion>)
@@ -60,6 +77,8 @@ function NavigateScreen() {
         }
       </List.Section>
     </ScrollView>
+    <ModalLocation visible={showModal} setVisible={setShowModal} locationSelected={modalLocation} />
+    </>
   );
 }
 
