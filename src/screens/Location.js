@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Button, ScrollView, Platform } from 'react-native';
+import { View, Button, ScrollView, Platform, AsyncStorage } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import { LocationCardItem } from '../components/card/Card';
 import ModalLocation from '../components/modal/ModalLocation';
@@ -29,6 +29,13 @@ function LocationScreen({ options }) {
   const [items, setItems] = React.useState(locations);
   const [page, setPage] = React.useState(1);
   const [search, setSearch] = React.useState('');
+  const [favList, setFavList] = React.useState([]);
+  const setFav = (key) => {
+    updateFav(key);
+  }
+  React.useEffect(()=>{
+    getFav().then((result) => setFavList(result.split(',')))
+  },[]);
 
   React.useEffect(() => {
     if (search.length > 2) {
@@ -39,6 +46,7 @@ function LocationScreen({ options }) {
     );
     }
   }, [search]);
+
 
   React.useEffect(()=>{
     if(locations) {
@@ -82,10 +90,12 @@ function LocationScreen({ options }) {
           const key = `location-${data.code}`;
           const subtitle = `Etapa plan paso a paso : ${data.stepByStepPlan.phase}`;
           const lastUpdate = `Actualizado el ${data.activeCases.lastUpdate}`;
+          const isFav = favList.includes(data.code);
           return(
             <LocationCardItem
               key={key}
               options={{
+                isFav: isFav,
                 title: data.name,
                 subtitle: subtitle,
                 content: {
@@ -95,6 +105,7 @@ function LocationScreen({ options }) {
                 footer: lastUpdate
               }}
               onPress={()=> {setShowModal(true); selectLocation(data)}}
+              onPressFav={() => setFav(data.code)}
             />
           );
         })}
@@ -102,4 +113,32 @@ function LocationScreen({ options }) {
       <ModalLocation visible={showModal} setVisible={setShowModal} locationSelected={locationSelected} />
     </>
   );
+}
+
+const updateFav = async(id) => {
+  try {
+    const item = '@infocovid:fav';
+    let favorites = await getFav();
+    let favList = favorites?.split(',') || [];
+    if (favList.includes(id)) {
+      favList = favList.filter(el => el != id)
+    } else {
+      favList.push(id);
+    }
+    await AsyncStorage.setItem(
+      item,
+      favList.join());
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const getFav = async() => {
+  try {
+    const item = '@infocovid:fav';
+    const result = await AsyncStorage.getItem(item);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 }

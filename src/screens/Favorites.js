@@ -1,15 +1,17 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { LocationCardItem } from '../components/card/Card';
+import ModalLocation from '../components/modal/ModalLocation';
 
 const FavoriteStack = createStackNavigator();
 
 export default function FavoriteScreenStack() {
   return (
     <FavoriteStack.Navigator>
-      <FavoriteStack.Screen name="Favorites" component={ FavoriteScreen }>
+      <FavoriteStack.Screen name="Favorites">
+      {props=> <FavoriteScreen />}
       </FavoriteStack.Screen>
     </FavoriteStack.Navigator>
   );
@@ -22,7 +24,7 @@ function FavoriteScreen() {
       <ScrollView>
         <LocationCardItem
           options={{
-            title: options.title,
+            title: 'test',
             subtitle: 'plan paso a paso : fase 1',
             content: {
               headers: ['casos total', 'casos hoy'],

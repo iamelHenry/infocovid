@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Card, Title, Paragraph, DataTable, Subheading } from 'react-native-paper';
+import {
+  Card,
+  Title,
+  Paragraph,
+  DataTable,
+  Subheading,
+  IconButton,
+  Colors } from 'react-native-paper';
 
 const TotalCaseCardComponent = ({ options }) => {
   return (
@@ -61,7 +68,13 @@ export const TableCardComponent = ({ options }) => {
   );
 }
 
-export const LocationCardItem = ({ options, onPress }) => {
+export const LocationCardItem = ({ options, onPress, onPressFav }) => {
+  const [favIcon, setFavIcon] = React.useState(options.isFav);
+  const setFav = () => {
+    setFavIcon(!favIcon);
+    onPressFav();
+  }
+
   return (
     <Card
       style={{
@@ -98,6 +111,13 @@ export const LocationCardItem = ({ options, onPress }) => {
           subtitleStyle={{ textAlign: "right" }}
         />
       </Card.Content>
+      <Card.Actions style={{ direction:"rtl"}}>
+        <IconButton
+          icon={(favIcon)? 'star': 'star-outline'}
+          color={Colors.red500}
+          size={20}
+          onPress={setFav}></IconButton>
+      </Card.Actions>
     </Card>
   );
 }
@@ -134,5 +154,3 @@ export const FaseCard = (data) => {
     </Card>
   );
 }
-
-export default TotalCaseCardComponent;
