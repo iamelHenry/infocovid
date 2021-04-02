@@ -2,10 +2,14 @@ import * as React from 'react';
 import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 import { FaseCard, LocationCardItem, ImageCard } from '../card/Card';
 import LocationCasesChart from '../chart/Chart';
+import { updateFav } from '../../services/Storage';
 
 const ModalLocation = (props) => {
   const { visible, setVisible, locationSelected } = props;
   const containerStyle = {backgroundColor: 'white', padding: 20};
+  const setFav = (key) => {
+    updateFav(key);
+  }
 
   if (!locationSelected) return null;
   return (
@@ -23,6 +27,7 @@ const ModalLocation = (props) => {
                   locationSelected.incidence.rate]],
               }
             }}
+            onPressFav={() => setFav(locationSelected.code)}
           />
         </Modal>
       </Portal>

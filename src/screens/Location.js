@@ -93,8 +93,8 @@ function LocationScreen({ options }) {
           const isFav = favList.includes(data.code);
           return(
             <LocationCardItem
-              key={key}
               options={{
+                key: key,
                 isFav: isFav,
                 title: data.name,
                 subtitle: subtitle,

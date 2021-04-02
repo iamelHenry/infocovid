@@ -50,7 +50,7 @@ function FavoriteScreen({ navigation }) {
             return (
             <LocationCardItem
               options={{
-                key: {key},
+                key: key,
                 isFav: true,
                 title: name,
                 subtitle: subtitle,
