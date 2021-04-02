@@ -82,6 +82,7 @@ export const LocationCardItem = ({ options, onPress, onPressFav }) => {
         borderRadius: 10,
       }}
       onPress={onPress}
+      key={options.key}
       >
       <Card.Content>
         <Card.Title
@@ -107,7 +108,7 @@ export const LocationCardItem = ({ options, onPress, onPressFav }) => {
           }
         </DataTable>
         <Card.Title
-          subtitle={options.content.footer}
+          subtitle={options.footer}
           subtitleStyle={{ textAlign: "right" }}
         />
       </Card.Content>
