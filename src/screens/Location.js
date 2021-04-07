@@ -34,7 +34,12 @@ function LocationScreen({ options }) {
     updateFav(key);
   }
   React.useEffect(()=>{
-    getFav().then((result) => setFavList(result.split(',')))
+    getFav().then((result) => {
+      if(result) {
+        console.log('result', result)
+        setFavList(result.split(','));
+      }
+    })
   },[]);
 
   React.useEffect(() => {

@@ -75,7 +75,7 @@ export const LocationCardItem = ({ options, onPress, onPressFav }) => {
     onPressFav();
   }
 
-  return (
+  const cardItem = (
     <Card
       style={{
         border: "solid 1px",
@@ -93,15 +93,19 @@ export const LocationCardItem = ({ options, onPress, onPressFav }) => {
           <DataTable.Header>
             {
               options.content.headers.map(
-                (header, index) => <DataTable.Title key={index} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{header}</DataTable.Title>
+                (header, index) => {
+                  <DataTable.Title key={options.key.concat('-title-',index)} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{header}</DataTable.Title>
+                }
               )
             }
           </DataTable.Header>
           {
             options.content.data.map(
-              (row, index) => (<DataTable.Row key={index}>{
+              (row, index) => (<DataTable.Row key={options.key.concat('-row-',index)}>{
                 row.map(
-                  (cell, index) => (<DataTable.Cell key={index} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{cell}</DataTable.Cell>)
+                  (cell, index) => (
+                    <DataTable.Cell key={options.key.concat('-cell-',index)} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{cell}</DataTable.Cell>
+                    )
                 )
               }</DataTable.Row>)
             )
@@ -121,6 +125,7 @@ export const LocationCardItem = ({ options, onPress, onPressFav }) => {
       </Card.Actions>
     </Card>
   );
+  return cardItem;
 }
 
 export const FaseCard = (data) => {

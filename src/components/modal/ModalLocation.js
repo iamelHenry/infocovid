@@ -12,6 +12,7 @@ const ModalLocation = (props) => {
   }
 
   if (!locationSelected) return null;
+  const key = `modal-${locationSelected.code}`;
   return (
     <Provider>
       <Portal>
@@ -20,6 +21,7 @@ const ModalLocation = (props) => {
           <LocationCardItem
             options={{ title: 'Cifras',
               subtitle: locationSelected.name,
+              key: key,
               content: {
                 headers: ['activos', 'nuevos', 'incidencia actual'],
                 data: [[locationSelected.activeCases.cases,
