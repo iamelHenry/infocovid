@@ -86,18 +86,19 @@ export const LocationCardItem = ({ options, onPress, onPressFav }) => {
       >
       <Card.Content>
         <Card.Title
+          key={options.key.concat('-title')}
           title={options.title}
           subtitle={options.subtitle}
           />
         <DataTable>
           <DataTable.Header>
-            {
-              options.content.headers.map(
-                (header, index) => {
-                  <DataTable.Title key={options.key.concat('-title-',index)} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{header}</DataTable.Title>
-                }
-              )
-            }
+          {
+            options.content.headers.map(
+              (header, index) => (
+                <DataTable.Title key={options.key.concat('-header-', index)} style={{ display:'flex', justifyContent: 'center', fontWeight: 'bold'}}>{header}</DataTable.Title>
+                )
+            )
+          }
           </DataTable.Header>
           {
             options.content.data.map(
